@@ -1,4 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;400;600&display=swap");
+@font-face {
+  font-family: "Star Wars Font";
+  src: url("./assets/Starjedi.ttf");
+}
 
 * {
   margin: 0;
@@ -8,13 +12,29 @@
 }
 
 body {
-  background: rgb(0, 0, 0);
+  background: linear-gradient(rgba(0, 0, 0, 0.801), rgba(0, 0, 0, 0.87)),
+    url("./assets/sw-bg2.png");
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
+
+/* Header */
+#logo {
   display: flex;
-  flex-direction: column;
+  justify-self: center;
   align-items: center;
+  flex-direction: column;
+}
+
+#logo:hover {
+  cursor: pointer;
 }
 
 h2 {
+  font-family: "Star Wars Font";
+  font-weight: 100;
+  font-size: 2rem;
   color: rgb(255, 255, 0);
   padding: 1em;
   padding-top: 0.5em;
@@ -24,8 +44,10 @@ h3 {
   color: rgb(255, 255, 0);
   padding: 1em;
   padding-top: 0;
+  padding-bottom: 1.5em;
 }
 
+/* Form */
 input,
 button {
   padding: 0.4em;
@@ -46,6 +68,7 @@ button:active {
   box-shadow: 0 0 3px 3px rgb(255, 255, 0);
 }
 
+/* Main content */
 .content-container {
   margin: 2em;
   display: flex;
@@ -77,41 +100,6 @@ li {
 
 li:hover {
   cursor: pointer;
-}
-
-#characterInfo {
-  margin-top: 1.5em;
-  margin-bottom: 0;
-  padding: 2em;
-  color: white;
-  background-color: rgb(41, 41, 41);
-  left: 0;
-  display: none;
-  border-radius: 3px;
-  width: 80vw;
-}
-
-#characterInfo:hover {
-  cursor: pointer;
-}
-
-#logo {
-  display: flex;
-  justify-self: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-#logo:hover {
-  cursor: pointer;
-}
-
-.infoList {
-  color: white;
-}
-
-#infoList {
-  color: white;
 }
 
 .more-info {
