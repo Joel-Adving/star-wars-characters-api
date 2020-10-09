@@ -7,14 +7,8 @@
   font-family: "Poppins", sans-serif;
 }
 
-html {
-}
-
 body {
   background: rgb(0, 0, 0);
-  /* background-size: cover;
-  background-position: center center;
-  height: 100vh; */
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -69,6 +63,8 @@ ul {
   list-style: none;
   display: flex;
   color: white;
+  align-items: center;
+  text-align: center;
   flex-wrap: wrap;
   justify-content: center;
   padding: 1em;
@@ -76,4 +72,49 @@ ul {
 
 li {
   margin: 1em;
+  color: yellow;
+}
+
+li:hover {
+  cursor: pointer;
+}
+
+#characterInfo {
+  margin-top: 1.5em;
+  margin-bottom: 0;
+  padding: 2em;
+  color: white;
+  background-color: rgb(41, 41, 41);
+  left: 0;
+  display: none;
+  border-radius: 3px;
+  width: 80vw;
+}
+
+#characterInfo:hover {
+  cursor: pointer;
+}
+
+#logo {
+  display: flex;
+  justify-self: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#logo:hover {
+  cursor: pointer;
+}
+
+.infoList {
+  color: white;
+}
+
+#infoList {
+  color: white;
+}
+
+.more-info {
+  color: white;
+  display: none;
 }

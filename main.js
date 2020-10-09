@@ -1,41 +1,43 @@
 const api_url = "http://swapi.dev/api/people/?page=";
+const searchForm = document.getElementById("search-form");
+const searchBtn = document.getElementById("search-btn");
+const searchInput = document.getElementById("search-input");
+const logo = document.getElementById("logo");
+const list = document.createElement("ul");
+const infoList = document.createElement("p");
+const characters = document.querySelector("#characters");
 let page = 1;
 let characterData = [];
 let allCharactersArray;
 
-const searchForm = document.getElementById("search-form");
-const searchBtn = document.getElementById("search-btn");
-const searchInput = document.getElementById("search-input");
-var list = document.createElement("ul");
-
-var characters = document.querySelector("#characters");
 characters.appendChild(list);
+list.appendChild(infoList);
 
-async function getData() {
+async function fetchCharacters() {
   do {
     const response = await fetch(api_url + page);
     const data = await response.json();
-    console.log(data.results);
+    // console.log(data.results);
     page++;
     characterData.push(data.results);
     allCharactersArray = [].concat.apply([], characterData);
   } while (page <= 8);
-  console.log(allCharactersArray);
+  // console.log(allCharactersArray);
 
   for (let i = 0; i < allCharactersArray.length; i++) {
-    var li = document.createElement("li");
+    let li = document.createElement("li");
+    li.classList.add("name");
+    let moreInfo =  document.createElement("p");
+    moreInfo.classList.add("more-info");
+
     li.textContent = allCharactersArray[i].name;
     list.appendChild(li);
 
-    console.log(allCharactersArray[i].name);
+    moreInfo.textContent =   "height: " + allCharactersArray[i].height + " cm, sex: "  + allCharactersArray[i].gender;
+    li.appendChild(moreInfo)
   }
 }
-
-getData();
-
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
+fetchCharacters();
 
 function searchCharacter(searchTerm) {
   return fetch(`https://swapi.dev/api/people/?search=${searchTerm}`)
@@ -43,6 +45,7 @@ function searchCharacter(searchTerm) {
       return response.json();
     })
     .then((data) => {
+      console.log(data.results)
       let array = [];
       for (var i = 0; i < data.results.length; i++) {
         array.push(data.results[i].name);
@@ -50,9 +53,11 @@ function searchCharacter(searchTerm) {
       console.log(array);
       list.innerHTML = "";
       array.forEach(function (name) {
-        var li = document.createElement("li");
+
+        let li = document.createElement("li");
         li.textContent = name;
         list.appendChild(li);
+        
       });
     });
 }
@@ -60,29 +65,43 @@ function searchCharacter(searchTerm) {
 searchForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const searchTerm = searchInput.value;
-  if (searchTerm == "") {
-    showMessage("Please add a search term", "alert-danger");
-  }
   searchInput.value = "";
-  searchCharacter(searchTerm).then((results) => {
-    console.log(results);
-  });
+  if (searchTerm == "") {;
+    return false;
+} else {
+  searchCharacter(searchTerm)
+}
 });
 
 searchBtn.addEventListener("click", (e) => {
   e.preventDefault();
-
   const searchTerm = searchInput.value;
-  if (searchTerm == "") {
-    showMessage("Please add a search term", "alert-danger");
-  }
   searchInput.value = "";
-
-  searchCharacter(searchTerm).then((results) => {
-    console.log(results);
-  });
+  if (searchTerm == "") {;
+    return false;
+} else {
+  searchCharacter(searchTerm)
+}
 });
 
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
-///////////////////////////////////////////////////
+const li = document.querySelectorAll("li")
+
+list.addEventListener("click", function() {
+
+  var x = document.getElementsByClassName('more-info');
+
+  for (var i=0;i<x.length;i+=1){
+	  if(x[i].style.display === 'none'){
+      x[i].style.display = 'block';
+	        }
+	         else {
+	        x[i].style.display = 'none';
+	    }
+	}
+});
+
+logo.addEventListener("click", function(){
+  location.reload();
+});
+
+
